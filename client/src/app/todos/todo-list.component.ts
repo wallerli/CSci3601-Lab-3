@@ -29,12 +29,12 @@ export class TodoListComponent implements OnInit {
 
   }
 
-  public updateName(newOwner: string): void {
+  public updateOwner(newOwner: string): void {
     this.todoOwner = newOwner;
     this.updateFilter();
   }
 
-  public updateAge(newStatus: string): void {
+  public updateStatus(newStatus: string): void {
     this.todoStatus = newStatus;
     this.updateFilter();
   }

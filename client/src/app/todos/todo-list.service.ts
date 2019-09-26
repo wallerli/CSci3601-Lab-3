@@ -36,9 +36,17 @@ export class TodoListService {
 
     // Filter by status
     if (searchStatus != null) {
-      filteredTodos = filteredTodos.filter((todo: Todo) => {
-        return !searchStatus || (todo.status == (searchStatus == 'Complete'));
-      });
+      searchStatus = searchStatus.toLowerCase();
+
+      if (searchStatus == 'complete') {
+        filteredTodos = filteredTodos.filter((todo: Todo) => {
+          return todo.status;
+        });
+      } else if (searchStatus == 'incomplete') {
+        filteredTodos = filteredTodos.filter((todo: Todo) => {
+          return !todo.status;
+        });
+      }
     }
 
     return filteredTodos;
