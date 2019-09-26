@@ -39,6 +39,11 @@ export class TodoListComponent implements OnInit {
     this.updateFilter();
   }
 
+  // public updateCategory(newCategory: string): void {
+  //   this.todoCategory = newCategory;
+  //   this.todoListService.getTodoByCategory(this.todoCategory);
+  // }
+
   public updateFilter() {
     this.filteredTodos =
       this.todoListService.filterTodos(
@@ -52,8 +57,8 @@ export class TodoListComponent implements OnInit {
    *
    */
   ngOnInit(): void {
-    const users: Observable<Todo[]> = this.todoListService.getTodos();
-    users.subscribe(
+    const todos: Observable<Todo[]> = this.todoListService.getTodos();
+    todos.subscribe(
       returnedTodos => {
         this.todos = returnedTodos;
       },
