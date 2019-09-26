@@ -49,6 +49,8 @@ export class TodoListService {
       }
     }
 
+    // Filter by category
+
     return filteredTodos;
   }
 }

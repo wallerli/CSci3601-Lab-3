@@ -30,11 +30,11 @@
           <mat-expansion-panel #elem [id]="todo.body" *ngFor="let todo of this.filteredTodos">
             <mat-expansion-panel-header>
 
-              <mat-panel-title matTooltip="category: {{todo.category}}">{{todo.category}}</mat-panel-title>
+              <mat-panel-title matTooltip="status: {{todo.status}}">{{todo.body}}</mat-panel-title>
 
             </mat-expansion-panel-header>
             <mat-panel-description>Owner: {{todo.owner}}</mat-panel-description>
-            <mat-panel-description>Status: {{todo.status}}</mat-panel-description>
+            <mat-panel-description>Category: {{todo.category}}</mat-panel-description>
 
           </mat-expansion-panel>
         </mat-accordion>

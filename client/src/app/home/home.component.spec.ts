@@ -31,4 +31,8 @@ describe('Home', () => {
     expect(el.textContent).toContain("Users");
   });
 
+  it('displays a link to todos', () => {
+    fixture.detectChanges();
+    expect(el.textContent).toContain("Todos");
+  });
 });
