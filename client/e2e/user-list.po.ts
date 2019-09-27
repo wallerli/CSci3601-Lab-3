@@ -5,7 +5,7 @@ export class UserPage {
     return browser.get('/users');
   }
 
-  //http://www.assertselenium.com/protractor/highlight-elements-during-your-protractor-test-run/
+  // http://www.assertselenium.com/protractor/highlight-elements-during-your-protractor-test-run/
   highlightElement(byObject) {
     function setStyle(element, style) {
       const previous = element.getAttribute('style');
