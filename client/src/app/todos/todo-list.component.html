@@ -20,18 +20,19 @@
             (input)="updateStatus($event.target.value)">
         </mat-form-field>
         <mat-form-field>
-        <input
-          matInput
-          id="todoCategory"
-          type="text"
-          placeholder="Search for category"
-          (input)="updateCategory($event.target.value)">
+          <input
+            matInput
+            id="todoCategory"
+            type="text"
+            placeholder="Search for category"
+            (input)="updateCategory($event.target.value)">
         </mat-form-field>
         <mat-form-field>
-        <input matInput id="todoContent"
-               type="text"
-               placeholder="Search for content"
-               (input)="updateBody($event.target.value)">
+          <input matInput
+            id="todoContent"
+            type="text"
+            placeholder="Search for content"
+            (input)="updateBody($event.target.value)">
         </mat-form-field>
 
         <mat-accordion *ngIf="todos; else todosError">
