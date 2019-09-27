@@ -9,7 +9,9 @@ describe('Home', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let de: DebugElement;
+  let df: DebugElement;
   let el: HTMLElement;
+  let fl: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -22,8 +24,12 @@ describe('Home', () => {
     component = fixture.componentInstance; // BannerComponent test instance
 
     // query for the link (<a> tag) by CSS element selector
-    de = fixture.debugElement.query(By.css('a'));
+    de = fixture.debugElement.query(By.css('#userslink'));
     el = de.nativeElement;
+
+    df = fixture.debugElement.query(By.css('#todoslink'));
+    fl = df.nativeElement;
+
   });
 
   it('displays a link to users', () => {
@@ -33,6 +39,6 @@ describe('Home', () => {
 
   it('displays a link to todos', () => {
     fixture.detectChanges();
-    expect(el.textContent).toContain("Todos");
+    expect(fl.textContent).toContain("Todos");
   });
 });
