@@ -21,7 +21,7 @@ export class TodoListService {
     return this.httpClient.get<Todo>(this.todoUrl + '/' + id);
   }
 
-  filterTodos(todos: Todo[], searchOwner?: string, searchStatus?: string): Todo[] {
+  filterTodos(todos: Todo[], searchOwner?: string, searchStatus?: string, searchCategory?: string, searchContent?: string): Todo[] {
 
     let filteredTodos = todos;
 
@@ -50,9 +50,22 @@ export class TodoListService {
     }
 
     // Filter by category
+    if (searchCategory != null) {
+      searchCategory = searchCategory.toLowerCase();
 
+      filteredTodos = filteredTodos.filter(todo => {
+        return !searchCategory || todo.category.toLowerCase().indexOf(searchCategory) !== -1;
+      });
+    }
 
+    // Filter by content
+    if (searchContent != null) {
+      searchContent = searchContent.toLowerCase();
 
+      filteredTodos = filteredTodos.filter(todo => {
+        return !searchContent || todo.body.toLowerCase().indexOf(searchContent) !== -1;
+      });
+    }
 
     return filteredTodos;
   }

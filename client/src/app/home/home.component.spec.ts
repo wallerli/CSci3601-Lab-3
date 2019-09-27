@@ -9,8 +9,8 @@ describe('Home', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let de: DebugElement;
-  let df: DebugElement;
   let el: HTMLElement;
+  let df: DebugElement;
   let fl: HTMLElement;
 
   beforeEach(() => {

@@ -19,12 +19,20 @@
             placeholder="Filter by status"
             (input)="updateStatus($event.target.value)">
         </mat-form-field>
-        <!--<mat-form-field>-->
-        <!--<input matInput id="todoCategory" #input type="text" placeholder="Search for category" (input)="contentChange($event.target.value)">-->
-        <!--</mat-form-field>-->
-        <!--<mat-form-field>-->
-        <!--<input matInput id="todoContent" #input type="text" placeholder="Search for content" (input)="contentChange($event.target.value)">-->
-        <!--</mat-form-field>-->
+        <mat-form-field>
+        <input
+          matInput
+          id="todoCategory"
+          type="text"
+          placeholder="Search for category"
+          (input)="updateCategory($event.target.value)">
+        </mat-form-field>
+        <mat-form-field>
+        <input matInput id="todoContent"
+               type="text"
+               placeholder="Search for content"
+               (input)="updateBody($event.target.value)">
+        </mat-form-field>
 
         <mat-accordion *ngIf="todos; else todosError">
           <mat-expansion-panel #elem [id]="todo.body" *ngFor="let todo of this.filteredTodos">
