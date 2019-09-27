@@ -43,3 +43,9 @@ yarn-error.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# IDE - Idea
+.idea/*
+
+# gradle
+.gradle/*
