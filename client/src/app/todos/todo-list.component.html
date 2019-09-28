@@ -23,7 +23,7 @@
           <mat-select
             id="todoCategory"
             (selectionChange)="updateCategory($event.value)">
-            <mat-option>None</mat-option>
+            <mat-option>All</mat-option>
             <mat-option value="software design">Software design</mat-option>
             <mat-option value="homework">Homework</mat-option>
             <mat-option value="groceries">Groceries</mat-option>
@@ -35,7 +35,7 @@
           <mat-select
             id="todoStatus"
             (selectionChange)="updateStatus($event.value)">
-            <mat-option>None</mat-option>
+            <mat-option>All</mat-option>
             <mat-option value="complete">Complete</mat-option>
             <mat-option value="incomplete">Incomplete</mat-option>
           </mat-select>
@@ -46,15 +46,38 @@
             <mat-expansion-panel-header>
 
               <mat-panel-title
-                *ngIf="!todo.status"
+                *ngIf="!todo.status && todo.category == 'software design'"
                 style="font-weight: 600;">
-                {{todo.body}}
+                <mat-icon>code</mat-icon>
+                TODO: {{todo.body}}
+              </mat-panel-title>
+
+              <mat-panel-title
+                *ngIf="!todo.status && todo.category == 'homework'"
+                style="font-weight: 600;">
+                <mat-icon>local_library</mat-icon>
+                TODO: {{todo.body}}
+              </mat-panel-title>
+
+              <mat-panel-title
+                *ngIf="!todo.status && todo.category == 'groceries'"
+                style="font-weight: 600;">
+                <mat-icon>store_mall_directory</mat-icon>
+                TODO: {{todo.body}}
+              </mat-panel-title>
+
+              <mat-panel-title
+                *ngIf="!todo.status && todo.category == 'video games'"
+                style="font-weight: 600;">
+                <mat-icon>games</mat-icon>
+                TODO: {{todo.body}}
               </mat-panel-title>
 
               <mat-panel-title
                 *ngIf="todo.status"
-                style="font-style: italic; text-decoration-line: line-through; color: dimgray">
-                DONE! {{todo.body}}
+                style="font-style: italic; color: gray">
+                <mat-icon>done</mat-icon>
+                DONE: {{todo.body}}
               </mat-panel-title>
 
             </mat-expansion-panel-header>
