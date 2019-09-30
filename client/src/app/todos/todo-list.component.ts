@@ -19,6 +19,7 @@ export class TodoListComponent implements OnInit {
   public todoStatus: string;
   public todoCategory: string;
   public todoBody: string;
+  public todoAPI: string;
 
 
   // Inject the TodoListService into this component.
@@ -28,7 +29,20 @@ export class TodoListComponent implements OnInit {
   // with the server.
 
   constructor(private todoListService: TodoListService) {
+  }
 
+  public updateAPI(newAPI: string): void{
+    this.todoAPI = newAPI;
+    console.log(this.todoAPI + " initialized");
+    const todos: Observable<Todo[]> = this.todoListService.getTodosByRequest(this.todoAPI);
+    todos.subscribe(
+      returnedTodos => {
+        this.filteredTodos = returnedTodos;
+      },
+      err => {
+        console.log(err);
+      });
+    console.log(this.todoAPI + " loaded");
   }
 
   public updateOwner(newOwner: string): void {

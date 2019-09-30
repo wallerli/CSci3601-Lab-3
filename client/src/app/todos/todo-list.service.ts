@@ -21,6 +21,11 @@ export class TodoListService {
     return this.httpClient.get<Todo>(this.todoUrl + '/' + id);
   }
 
+  getTodosByRequest(request: string): Observable<Todo[]> {
+    console.log(this.todoUrl + '?' + request);
+    return this.httpClient.get<Todo[]>(this.todoUrl + '?' + request);
+  }
+
   filterTodos(todos: Todo[], searchOwner?: string, searchStatus?: string, searchCategory?: string, searchContent?: string): Todo[] {
 
     let filteredTodos = todos;
