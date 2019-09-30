@@ -2,6 +2,7 @@
   <div flex-gt-sm="80" flex-offset-gt-sm="10">
     <mat-card>
       <mat-card-title id="todo-list-title">Todos</mat-card-title>
+
       <mat-divider></mat-divider>
       <mat-card-content>
         <mat-form-field>
@@ -40,7 +41,14 @@
             <mat-option value="incomplete">Incomplete</mat-option>
           </mat-select>
         </mat-form-field>
-
+        <mat-form-field>
+          <input
+            matTooltip="owner=...&category=...&status=...&contains=...&limit=...&orderBy=..."
+            matInput
+            id="apiRequest"
+            placeholder="Direct Req: api/todos?..."
+            (keydown.enter)="updateAPI($event.target.value)">
+        </mat-form-field>
         <mat-accordion *ngIf="todos; else todosError">
           <mat-expansion-panel #elem [id]="todo.body" *ngFor="let todo of this.filteredTodos">
             <mat-expansion-panel-header>
