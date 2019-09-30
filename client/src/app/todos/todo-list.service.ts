@@ -22,7 +22,6 @@ export class TodoListService {
   }
 
   getTodosByRequest(request: string): Observable<Todo[]> {
-    console.log(this.todoUrl + '?' + request);
     return this.httpClient.get<Todo[]>(this.todoUrl + '?' + request);
   }
 

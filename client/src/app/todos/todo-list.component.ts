@@ -33,7 +33,6 @@ export class TodoListComponent implements OnInit {
 
   public updateAPI(newAPI: string): void{
     this.todoAPI = newAPI;
-    console.log(this.todoAPI + " initialized");
     const todos: Observable<Todo[]> = this.todoListService.getTodosByRequest(this.todoAPI);
     todos.subscribe(
       returnedTodos => {
@@ -42,7 +41,6 @@ export class TodoListComponent implements OnInit {
       err => {
         console.log(err);
       });
-    console.log(this.todoAPI + " loaded");
   }
 
   public updateOwner(newOwner: string): void {
