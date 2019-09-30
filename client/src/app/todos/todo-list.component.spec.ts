@@ -107,4 +107,10 @@ describe('Todo list service: ', () => {
     expect(todoListService.filterTodos(testTodos, todoName).length).toBe(3);
   });
 
+  // it('filterTodos() filters by body content', () => {
+  //   expect(testTodos.length).toBe(5);
+  //   let todoContent = 'Minecraft';
+  //   expect(todoListService.filterTodos(testTodos, todoContent).length).toBe(2);
+  // })
+
 });
