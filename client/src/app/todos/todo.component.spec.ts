@@ -48,7 +48,7 @@ describe('Todo component', () => {
         },
         {
           id: 'fifth',
-          owner: 'Blanche',
+          owner: 'Workman',
           status: true,
           body: 'Fifth, pick up Ramen and Oreos!',
           category: 'groceries'
@@ -73,7 +73,7 @@ describe('Todo component', () => {
     todoComponent.setId('fifth');
     expect(todoComponent.todo).toBeDefined();
     expect(todoComponent.todo.category).toBe('groceries');
-    expect(todoComponent.todo.owner).toBe('Blanche');
+    expect(todoComponent.todo.owner).toBe('Workman');
     expect(todoComponent.todo.status).toBe(true);
     expect(todoComponent.todo.body).toBe('Fifth, pick up Ramen and Oreos!');
   });
