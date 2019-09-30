@@ -12,3 +12,12 @@
   padding-right: 14px;
 }
 
+mat-icon {
+  margin-right: 25px;
+}
+
+mat-card {
+  max-width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
