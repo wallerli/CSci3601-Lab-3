@@ -1,139 +1,140 @@
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
-import {HttpClient} from '@angular/common/http';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Observable} from 'rxjs';
+import { of } from 'rxjs';
+import {FormsModule} from '@angular/forms';
+
+import {CustomModule} from '../custom.module';
 
 import {Todo} from './todo';
+import {TodoListComponent} from './todo-list.component';
 import {TodoListService} from './todo-list.service';
 
-describe('Todo list service: ', () => {
-  // a small collection of test todos
-  const testTodos: Todo[] = [
-    {
-      id: "first",
-      owner: "Blanche",
-      status: false,
-      body: "First, create a web page",
-      category: "software design"
-    },
-    {
-      id: "second",
-      owner: "Fry",
-      status: false,
-      body: "Second, take a Minecraft break.",
-      category: "video games"
-    },
-    {
-      id: "third",
-      owner: "Fry",
-      status: true,
-      body: "Third, finish intro 101 course homework.",
-      category: "homework"
-    },
-    {
-      id: "fourth",
-      owner: "Blanche",
-      status: true,
-      body: "Fourth, code Minecraft video game into web page.",
-      category: "software design"
-    },
-    {
-      id: "fifth",
-      owner: "Workman",
-      status: true,
-      body: "Fifth, pick up Ramen and Oreos!",
-      category: "groceries"
-    }
-  ];
-  let todoListService: TodoListService;
-  // These are used to mock the HTTP requests so that we (a) don't have to
-  // have the server running and (b) we can check exactly which HTTP
-  // requests were made to ensure that we're making the correct requests.
-  let httpClient: HttpClient;
-  let httpTestingController: HttpTestingController;
-  
+describe('Todo list', () => {
+
+  let todoList: TodoListComponent;
+  let fixture: ComponentFixture<TodoListComponent>;
+
+  let todoListServiceStub: {
+    getTodos: () => Observable<Todo[]>
+  };
+
   beforeEach(() => {
-    // Set up the mock handling of the HTTP requests
+    // stub TodoService for test purposes
+    todoListServiceStub = {
+      getTodos: () => of([
+        {
+          id: 'first',
+          owner: 'Blanche',
+          status: false,
+          body: 'First, create a web page',
+          category: 'software design'
+        },
+        {
+          id: 'second',
+          owner: 'Fry',
+          status: false,
+          body: 'Second, take a Minecraft break.',
+          category: 'video games'
+        },
+        {
+          id: 'third',
+          owner: 'Fry',
+          status: true,
+          body: 'Third, finish intro 101 course homework.',
+          category: 'homework'
+        },
+        {
+          id: 'fourth',
+          owner: 'Blanche',
+          status: true,
+          body: 'Fourth, code Minecraft video game into web page.',
+          category: 'software design'
+        },
+        {
+          id: 'fifth',
+          owner: 'Workman',
+          status: true,
+          body: 'Fifth, pick up Ramen and Oreos!',
+          category: 'groceries'
+        }
+      ])
+    };
+
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
+      imports: [CustomModule],
+      declarations: [TodoListComponent],
+      // providers:    [ TodoListService ]  // NO! Don't provide the real service!
+      // Provide a test-double instead
+      providers: [{provide: TodoListService, useValue: todoListServiceStub}]
     });
-    httpClient = TestBed.get(HttpClient);
-    httpTestingController = TestBed.get(HttpTestingController);
-    // Construct an instance of the service with the mock
-    // HTTP client.
-    todoListService = new TodoListService(httpClient);
-  });
-  
-  afterEach(() => {
-    httpTestingController.verify();
   });
 
-  it('getTodos() calls api/todos', () => {
-    // Assert that the todos we get from this call to getTodos()
-    // should be our set of test todos. Because we're subscribing
-    // to the result of getTodos(), this won't actually get
-    // checked until the mocked HTTP request "returns" a response.
-    // This happens when we call req.flush(testTodos) a few lines
-    // down.
-    todoListService.getTodos().subscribe(
-      todos => expect(todos).toBe(testTodos)
-    );
+  beforeEach(async(() => {
+    TestBed.compileComponents().then(() => {
+      fixture = TestBed.createComponent(TodoListComponent);
+      todoList = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+  }));
 
-    // Specify that (exactly) one request will be made to the specified URL.
-    const req = httpTestingController.expectOne(todoListService.todoUrl);
-    // Check that the request made to that URL was a GET request.
-    expect(req.request.method).toEqual('GET');
-    // Specify the content of the response to that request. This
-    // triggers the subscribe above, which leads to that check
-    // actually being performed.
-    req.flush(testTodos);
+  it('contains all the todos', () => {
+    expect(todoList.todos.length).toBe(5);
   });
 
-  it('getTodoById() calls api/todos/id', () => {
-    const targetTodo: Todo = testTodos[1];
-    const targetId: string = targetTodo.id;
-    todoListService.getTodoById(targetId).subscribe(
-      todo => expect(todo).toBe(targetTodo)
-    );
-
-    const expectedUrl: string = todoListService.todoUrl + '/' + targetId;
-    const req = httpTestingController.expectOne(expectedUrl);
-    expect(req.request.method).toEqual('GET');
-    req.flush(targetTodo);
+  it('contains a todo owned by \'Workman\'', () => {
+    expect(todoList.todos.some((todo: Todo) => todo.owner === 'Workman')).toBe(true);
   });
 
-  it('filterTodos() filters by owner', () => {
-    expect(testTodos.length).toBe(5);
-    let todoName = 'a';
-    expect(todoListService.filterTodos(testTodos, todoName, null, null, null).length).toBe(3);
+  it('contain to-dos owned by \'Blanche\'', () => {
+    expect(todoList.todos.some((todo: Todo) => todo.owner === 'Blanche')).toBe(true);
   });
 
-  it('filterTodos() filters by body content', () => {
-    expect(testTodos.length).toBe(5);
-    let todoContent = 'Minecraft';
-    expect(todoListService.filterTodos(testTodos, null, null, null, todoContent).length).toBe(2);
+  it('doesn\'t contain a todo owned by \'Emma\'', () => {
+    expect(todoList.todos.some((todo: Todo) => todo.owner === 'Emma')).toBe(false);
   });
 
-  it('filterTodos() filters by status', () => {
-    expect(testTodos.length).toBe(5);
-    let todoStatus = 'true';
-    expect(todoListService.filterTodos(testTodos, null, todoStatus, null, null).length).toBe(3);
+  it('has two to-dos with category software design', function () {
+    expect(todoList.todos.filter((todo: Todo) => todo.category === 'software design').length).toBe(2);
   });
 
-  it('filterTodos() filters by category', () => {
-    expect(testTodos.length).toBe(5);
-    let todoCategory = 'video games';
-    expect(todoListService.filterTodos(testTodos, null, null, todoCategory, null).length).toBe(1);
+  it('has three to-dos with status true', function () {
+    expect(todoList.todos.filter((todo: Todo) => todo.status === true).length).toBe(3);
+  });
+});
+
+describe('Misbehaving Todo List', () => {
+  let todoList: TodoListComponent;
+  let fixture: ComponentFixture<TodoListComponent>;
+
+  let todoListServiceStub: {
+    getTodos: () => Observable<Todo[]>
+  };
+
+  beforeEach(() => {
+    // stub TodoService for test purposes
+    todoListServiceStub = {
+      getTodos: () => Observable.create(observer => {
+        observer.error('Error-prone observable');
+      })
+    };
+
+    TestBed.configureTestingModule({
+      imports: [FormsModule, CustomModule],
+      declarations: [TodoListComponent],
+      providers: [{provide: TodoListService, useValue: todoListServiceStub}]
+    });
   });
 
-  it('filterTodos() filters by combinations of fields', () => {
-    expect(testTodos.length).toBe(5);
-    let todoOwner = 'a';
-    let todoStatus = 'false';
-    let todoCategory = 'software design';
-    let todoContent = 'web page';
-    expect(todoListService.filterTodos(testTodos, todoOwner, todoStatus, todoCategory, todoContent).length).toBe(1);
-    expect(todoListService.filterTodos(testTodos, todoOwner, null, null, todoContent).length).toBe(2);
-    expect(todoListService.filterTodos(testTodos, null, todoStatus, todoCategory, null).length).toBe(1);
-  })
+  beforeEach(async(() => {
+    TestBed.compileComponents().then(() => {
+      fixture = TestBed.createComponent(TodoListComponent);
+      todoList = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+  }));
 
+  it('generates an error if we don\'t set up a TodoListService', () => {
+    // Since the observer throws an error, we don't expect todos to be defined.
+    expect(todoList.todos).toBeUndefined();
+  });
 });

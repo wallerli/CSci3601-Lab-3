@@ -19,39 +19,39 @@ describe('Todo component', () => {
     todoListServiceStub = {
       getTodoById: (todoId: string) => of([
         {
-          id: "first",
-          owner: "Blanche",
+          id: 'first',
+          owner: 'Blanche',
           status: false,
-          body: "First, create a web page",
-          category: "software design"
+          body: 'First, create a web page',
+          category: 'software design'
         },
         {
-          id: "second",
-          owner: "Fry",
+          id: 'second',
+          owner: 'Fry',
           status: false,
-          body: "Second, take a Minecraft break.",
-          category: "video games"
+          body: 'Second, take a Minecraft break.',
+          category: 'video games'
         },
         {
-          id: "third",
-          owner: "Fry",
+          id: 'third',
+          owner: 'Fry',
           status: true,
-          body: "Third, finish intro 101 course homework.",
-          category: "homework"
+          body: 'Third, finish intro 101 course homework.',
+          category: 'homework'
         },
         {
-          id: "fourth",
-          owner: "Blanche",
+          id: 'fourth',
+          owner: 'Blanche',
           status: true,
-          body: "Fourth, code Minecraft video game into web page.",
-          category: "software design"
+          body: 'Fourth, code Minecraft video game into web page.',
+          category: 'software design'
         },
         {
-          id: "fifth",
-          owner: "Blanche",
+          id: 'fifth',
+          owner: 'Blanche',
           status: true,
-          body: "Fifth, pick up Ramen and Oreos!",
-          category: "groceries"
+          body: 'Fifth, pick up Ramen and Oreos!',
+          category: 'groceries'
         }
       ].find(todo => todo.id === todoId))
     };
@@ -59,7 +59,7 @@ describe('Todo component', () => {
     TestBed.configureTestingModule({
       declarations: [TodoComponent],
       providers: [{provide: TodoListService, useValue: todoListServiceStub}]
-    })
+    });
   });
 
   beforeEach(async(() => {

@@ -33,20 +33,8 @@ describe('Todo List', () => {
     page.navigateTo();
     // Testing owner filtering
     page.enterAField('todoOwner', 'F');
-    expect(page.getUniqueTodo("58895985c1849992336c219b")).toEqual("Fry");
-    page.backspace();
-    page.enterAField('todoOwner', 'Blanche');
-    expect(page.getUniqueTodo("588959850ccede43cc675826")).toEqual("Blanche");
-    expect(page.getUniqueTodo("5889598528c4748a0292e014")).toThrowError();
+    expect(page.getUniqueTodo('58895985c1849992336c219b')).toEqual(
+      'TODO: In sunt ex non tempor cillum commodo amet incididunt anim qui commodo quis. Cillum non labore ex sint esse.'
+    );
   });
-
-  it('should type something into content filter box and check that it returned the correct elements', () => {
-    page.navigateTo();
-    // Testing content filtering
-    page.enterAField('todoContent', 'Deserunt velit reprehenderit deserunt');
-    expect(page.getUniqueTodo("58895985847a6c1445ec4048")).toEqual("Fry");
-    page.backspace();
-
-  });
-
 });
