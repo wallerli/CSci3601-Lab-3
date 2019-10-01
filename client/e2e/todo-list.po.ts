@@ -27,7 +27,7 @@ export class TodoPage {
   }
 
   // this for entering any of the search fields that will be on the webpage.
-  // Field Inputs: 'todoOwner', 'todoStatus', 'todoCategory', 'todoContent'
+  // Field Inputs: 'todoOwner', 'todoStatus', 'todoCategory', 'todoContent', 'apiRequest'
   enterAField(field: string, content: string) {
     let input = element(by.id(field));
     input.click();
@@ -38,9 +38,13 @@ export class TodoPage {
     browser.actions().sendKeys(Key.BACK_SPACE).perform();
   }
 
-  getUniqueTodo(_id: string) {
-    let todo = element(by.id(_id)).getText();
-    this.highlightElement(by.id(_id));
+  selectEnterKey() {
+    browser.actions().sendKeys(Key.ENTER).perform();
+  }
+
+  getUniqueTodo(content: string) {
+    let todo = element(by.id(content)).getText();
+    this.highlightElement(by.id(content));
 
     return todo;
   }
