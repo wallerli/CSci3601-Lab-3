@@ -70,7 +70,7 @@ describe('Todo list', () => {
   });
 
   beforeEach(async(() => {
-    TestBed.compileComponents().then(() => {
+    TestBed.compileComponents().then(() => {status
       fixture = TestBed.createComponent(TodoListComponent);
       todoList = fixture.componentInstance;
       fixture.detectChanges();
@@ -99,6 +99,34 @@ describe('Todo list', () => {
 
   it('has three to-dos with status true', function () {
     expect(todoList.todos.filter((todo: Todo) => todo.status === true).length).toBe(3);
+  });
+
+  it('has two to-dos containing \'Mine-craft\'', function () {
+    expect(todoList.todos.filter((todo: Todo) => todo.body.indexOf('Mine-craft') !== -1).length).toBe(2);
+  });
+
+  it('doesn\'t contain a todo containing \'Computer Science\'', function () {
+    expect(todoList.todos.some((todo: Todo) => todo.body.indexOf('Computer Science') !== -1)).toBe(false);
+  });
+
+  it('doesn\'t contain a to-do not having an id', function () {
+    expect(todoList.todos.some((todo: Todo) => todo.id === null)).toBe(false);
+  });
+
+  it('doesn\'t contain a to-do not having an owner', function () {
+    expect(todoList.todos.some((todo: Todo) => todo.owner === null)).toBe(false);
+  });
+
+  it('doesn\'t contain a to-do not having a status', function () {
+    expect(todoList.todos.some((todo: Todo) => todo.status === null)).toBe(false);
+  });
+
+  it('doesn\'t contain a to-do not having a body', function () {
+    expect(todoList.todos.some((todo: Todo) => todo.body === null)).toBe(false);
+  });
+
+  it('doesn\'t contain a to-do not having a category', function () {
+    expect(todoList.todos.some((todo: Todo) => todo.category === null)).toBe(false);
   });
 });
 
