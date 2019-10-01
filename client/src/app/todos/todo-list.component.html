@@ -73,43 +73,42 @@
         </mat-form-field>
 
         <mat-accordion *ngIf="todos; else todosError">
-          <mat-expansion-panel #elem [id]="todo.body" *ngFor="let todo of this.filteredTodos">
+          <mat-expansion-panel #elem *ngFor="let todo of this.filteredTodos">
             <mat-expansion-panel-header>
 
               <mat-panel-title
                 *ngIf="!todo.status && todo.category == 'software design'"
                 style="font-weight: 600;">
                 <mat-icon>code</mat-icon>
-                TODO: {{todo.body}}
+                <div [id]="todo.body">TODO: {{todo.body}}</div>
               </mat-panel-title>
 
               <mat-panel-title
                 *ngIf="!todo.status && todo.category == 'homework'"
                 style="font-weight: 600;">
                 <mat-icon>local_library</mat-icon>
-                TODO: {{todo.body}}
+                <div [id]="todo.body">TODO: {{todo.body}}</div>
               </mat-panel-title>
 
               <mat-panel-title
                 *ngIf="!todo.status && todo.category == 'groceries'"
                 style="font-weight: 600;">
                 <mat-icon>store_mall_directory</mat-icon>
-                TODO:
-                {{todo.body}}
+                <div [id]="todo.body">TODO: {{todo.body}}</div>
               </mat-panel-title>
 
               <mat-panel-title
                 *ngIf="!todo.status && todo.category == 'video games'"
                 style="font-weight: 600;">
                 <mat-icon>games</mat-icon>
-                TODO: {{todo.body}}
+                <div [id]="todo.body">TODO: {{todo.body}}</div>
               </mat-panel-title>
 
               <mat-panel-title
                 *ngIf="todo.status"
                 style="font-style: italic; color: gray">
                 <mat-icon>done</mat-icon>
-                DONE: {{todo.body}}
+                <div [id]="todo.body">DONE: {{todo.body}}</div>
               </mat-panel-title>
 
             </mat-expansion-panel-header>

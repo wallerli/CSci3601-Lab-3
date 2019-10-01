@@ -11,7 +11,7 @@ browser.driver.controlFlow().execute = function () {
   // This delay is only put here so that you can watch the browser do its' thing.
   // If you're tired of it taking long you can remove this call
   origFn.call(browser.driver.controlFlow(), function () {
-    return protractor.promise.delayed(10);
+    return protractor.promise.delayed(25);
   });
 
   return origFn.apply(browser.driver.controlFlow(), args);
@@ -33,8 +33,8 @@ describe('Todo List', () => {
     page.navigateTo();
     // Testing owner filtering
     page.enterAField('todoOwner', 'F');
-    let returnedStr = page.getUniqueTodo('Ullamco irure laborum magna dolor non. Anim occaecat adipisicing cillum eu magna in.').toString();
-    expect(returnedStr.substr(returnedStr.lastIndexOf(' ')) === 'DONE: Ullamco irure laborum magna dolor non. Anim occaecat adipisicing cillum eu magna in.'
+    expect(page.getUniqueTodo('Ullamco irure laborum magna dolor non. Anim occaecat adipisicing cillum eu magna in.')).toEqual(
+      'DONE: Ullamco irure laborum magna dolor non. Anim occaecat adipisicing cillum eu magna in.'
     );
 
     page.navigateTo();
@@ -42,17 +42,11 @@ describe('Todo List', () => {
     expect(page.getUniqueTodo('Qui officia excepteur officia ex anim ad ullamco Lorem. Pariatur cupidatat aliqua excepteur laboris nostrud elit laborum do aliqua.')).toEqual(
       'TODO: Qui officia excepteur officia ex anim ad ullamco Lorem. Pariatur cupidatat aliqua excepteur laboris nostrud elit laborum do aliqua.'
     );
+
+    page.navigateTo();
     page.enterAField('todoOwner', 'blanche');
     expect(page.getUniqueTodo('Aliqua ut proident sunt minim. Sunt cupidatat ullamco reprehenderit sit Lorem.')).toEqual(
       'TODO: Aliqua ut proident sunt minim. Sunt cupidatat ullamco reprehenderit sit Lorem.'
-    );
-  });
-
-  it('should type something into status filter box and check that it returned the correct elements', () => {
-    page.navigateTo();
-    page.enterAField('todoStatus', 'Complete');
-    expect(page.getUniqueTodo('Excepteur anim mollit magna amet in cillum. Elit quis aliqua elit mollit eu.')).toEqual(
-      'DONE: Excepteur anim mollit magna amet in cillum. Elit quis aliqua elit mollit eu.'
     );
   });
 
@@ -73,6 +67,14 @@ describe('Todo List', () => {
     );
   });
 
+  it('should type something into status filter box and check that it returned the correct elements', () => {
+    page.navigateTo();
+    page.enterAField('todoStatus', 'Complete');
+    expect(page.getUniqueTodo('Excepteur anim mollit magna amet in cillum. Elit quis aliqua elit mollit eu.')).toEqual(
+      'DONE: Excepteur anim mollit magna amet in cillum. Elit quis aliqua elit mollit eu.'
+    );
+  });
+
   it('should type something into multiple filters and check that correct elements are returned.', () => {
     page.navigateTo();
     page.enterAField('todoOwner', 'Blanche');
@@ -90,14 +92,24 @@ describe('Todo List', () => {
     expect(page.getUniqueTodo('Consequat dolore amet pariatur ad excepteur proident anim non nulla aliqua. Pariatur tempor culpa sint adipisicing do.')).toEqual(
       'TODO: Consequat dolore amet pariatur ad excepteur proident anim non nulla aliqua. Pariatur tempor culpa sint adipisicing do.'
     );
+
+    expect(page.getUniqueTodo('Aliqua adipisicing ex magna quis esse cupidatat veniam non ullamco aute nisi dolore. Sint non adipisicing officia eu adipisicing non deserunt in ex magna consectetur esse tempor.')).toEqual(
+      'TODO: Aliqua adipisicing ex magna quis esse cupidatat veniam non ullamco aute nisi dolore. Sint non adipisicing officia eu adipisicing non deserunt in ex magna consectetur esse tempor.'
+    );
+
+
   });
 
   it('should type something into api request field and check that correct elements are returned', () => {
     page.navigateTo();
     page.enterAField('apiRequest', 'owner=Barry&contains=Lorem');
     page.selectEnterKey();
-    expect(page.getUniqueTodo('Labore reprehenderit Lorem adipisicing non. Sit incididunt commodo dolor do id.')).toEqual(
-      'TODO: Labore reprehenderit Lorem adipisicing non. Sit incididunt commodo dolor do id.'
+    expect(page.getUniqueTodo('Laborum pariatur in et ipsum occaecat qui occaecat enim ut adipisicing nisi cupidatat magna veniam. Amet ullamco veniam Lorem officia aute consectetur aliquip quis laborum fugiat velit incididunt.')).toEqual(
+      'DONE: Laborum pariatur in et ipsum occaecat qui occaecat enim ut adipisicing nisi cupidatat magna veniam. Amet ullamco veniam Lorem officia aute consectetur aliquip quis laborum fugiat velit incididunt.'
+    );
+
+    expect(page.getUniqueTodo('Veniam commodo exercitation consequat eu ut duis ex do. Sit fugiat cupidatat enim Lorem tempor minim sint laboris.')).toEqual(
+      'TODO: Veniam commodo exercitation consequat eu ut duis ex do. Sit fugiat cupidatat enim Lorem tempor minim sint laboris.'
     );
   });
 });
