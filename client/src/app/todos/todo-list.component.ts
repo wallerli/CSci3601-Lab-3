@@ -31,7 +31,7 @@ export class TodoListComponent implements OnInit {
   constructor(private todoListService: TodoListService) {
   }
 
-  public updateAPI(newAPI: string): void{
+  public updateAPI(newAPI: string): void {
     this.todoAPI = newAPI;
     const todos: Observable<Todo[]> = this.todoListService.getTodosByRequest(this.todoAPI);
     todos.subscribe(
@@ -62,11 +62,6 @@ export class TodoListComponent implements OnInit {
     this.todoBody = newBody;
     this.updateFilter();
   }
-
-  // public updateCategory(newCategory: string): void {
-  //   this.todoCategory = newCategory;
-  //   this.todoListService.getTodoByCategory(this.todoCategory);
-  // }
 
   public updateFilter() {
     this.filteredTodos =

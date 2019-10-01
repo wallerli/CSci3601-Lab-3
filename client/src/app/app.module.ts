@@ -14,15 +14,26 @@ import {APP_BASE_HREF} from '@angular/common';
 import {CustomModule} from './custom.module';
 import {UserComponent} from './users/user.component';
 import {TodoComponent} from './todos/todo.component';
-import {MatSelectModule} from '@angular/material/select';
+// import {MatSelectModule} from '@angular/material/select';
+// import {MatFormFieldModule, MatOptionModule} from '@angular/material';
 
 @NgModule({
   imports: [
+    // MatOptionModule,
     BrowserModule,
     HttpClientModule,
     Routing,
     CustomModule,
-    MatSelectModule,
+    // MatSelectModule,
+    // MatFormFieldModule,
+  ],
+  exports: [
+    // MatOptionModule,
+    BrowserModule,
+    HttpClientModule,
+    CustomModule,
+    // MatSelectModule,
+    // MatFormFieldModule,
   ],
   declarations: [
     AppComponent,

@@ -23,27 +23,37 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Filter by category</mat-label>
-          <mat-select
-            id="todoCategory"
-            (selectionChange)="updateCategory($event.value)">
-            <mat-option>All</mat-option>
-            <mat-option value="software design">Software design</mat-option>
-            <mat-option value="homework">Homework</mat-option>
-            <mat-option value="groceries">Groceries</mat-option>
-            <mat-option value="video games">Video games</mat-option>
-          </mat-select>
+          <input matInput
+                 id="todoCategory"
+                 type="text"
+                 placeholder="Filter by category"
+                 (input)="updateCategory($event.target.value)">
+<!--          <mat-label>Filter by category</mat-label>-->
+<!--          <mat-select-->
+<!--            id="todoCategory"-->
+<!--            (selectionChange)="updateCategory($event.value)">-->
+<!--            <mat-option>All</mat-option>-->
+<!--            <mat-option value="software design">Software design</mat-option>-->
+<!--            <mat-option value="homework">Homework</mat-option>-->
+<!--            <mat-option value="groceries">Groceries</mat-option>-->
+<!--            <mat-option value="video games">Video games</mat-option>-->
+<!--          </mat-select>-->
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Filter by status</mat-label>
-          <mat-select
-            id="todoStatus"
-            (selectionChange)="updateStatus($event.value)">
-            <mat-option>All</mat-option>
-            <mat-option value="complete">Complete</mat-option>
-            <mat-option value="incomplete">Incomplete</mat-option>
-          </mat-select>
+          <input matInput
+                 id="todoStatus"
+                 type="text"
+                 placeholder="Filter by status"
+                 (input)="updateStatus($event.target.value)">
+<!--          <mat-label>Filter by status</mat-label>-->
+<!--          <mat-select-->
+<!--            id="todoStatus"-->
+<!--            (selectionChange)="updateStatus($event.value)">-->
+<!--            <mat-option>All</mat-option>-->
+<!--            <mat-option value="complete">Complete</mat-option>-->
+<!--            <mat-option value="incomplete">Incomplete</mat-option>-->
+<!--          </mat-select>-->
         </mat-form-field>
 
         <mat-form-field>
