@@ -46,7 +46,6 @@ export class UserPage {
     browser.actions().sendKeys(Key.BACK_SPACE).perform();
   }
 
-
   getUniqueUser(email: string) {
     let user = element(by.id(email)).getText();
     this.highlightElement(by.id(email));
