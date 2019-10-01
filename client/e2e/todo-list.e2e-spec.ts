@@ -7,7 +7,6 @@ let origFn = browser.driver.controlFlow().execute;
 browser.driver.controlFlow().execute = function () {
   let args = arguments;
 
-  // queue 100ms wait between test
   // This delay is only put here so that you can watch the browser do its' thing.
   // If you're tired of it taking long you can remove this call
   origFn.call(browser.driver.controlFlow(), function () {
@@ -96,8 +95,6 @@ describe('Todo List', () => {
     expect(page.getUniqueTodo('Aliqua adipisicing ex magna quis esse cupidatat veniam non ullamco aute nisi dolore. Sint non adipisicing officia eu adipisicing non deserunt in ex magna consectetur esse tempor.')).toEqual(
       'TODO: Aliqua adipisicing ex magna quis esse cupidatat veniam non ullamco aute nisi dolore. Sint non adipisicing officia eu adipisicing non deserunt in ex magna consectetur esse tempor.'
     );
-
-
   });
 
   it('should type something into api request field and check that correct elements are returned', () => {
