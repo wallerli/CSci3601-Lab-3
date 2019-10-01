@@ -30,7 +30,7 @@ describe('Todo List', () => {
 
   it('should type something into owner filter box and check that it returned the correct elements', () => {
     page.navigateTo();
-    // Testing owner filtering
+
     page.enterAField('todoOwner', 'F');
     expect(page.getUniqueTodo('Ullamco irure laborum magna dolor non. Anim occaecat adipisicing cillum eu magna in.')).toEqual(
       'DONE: Ullamco irure laborum magna dolor non. Anim occaecat adipisicing cillum eu magna in.'
