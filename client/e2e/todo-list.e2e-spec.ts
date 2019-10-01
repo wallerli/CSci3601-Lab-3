@@ -92,14 +92,24 @@ describe('Todo List', () => {
     expect(page.getUniqueTodo('Consequat dolore amet pariatur ad excepteur proident anim non nulla aliqua. Pariatur tempor culpa sint adipisicing do.')).toEqual(
       'TODO: Consequat dolore amet pariatur ad excepteur proident anim non nulla aliqua. Pariatur tempor culpa sint adipisicing do.'
     );
+
+    expect(page.getUniqueTodo('Aliqua adipisicing ex magna quis esse cupidatat veniam non ullamco aute nisi dolore. Sint non adipisicing officia eu adipisicing non deserunt in ex magna consectetur esse tempor.')).toEqual(
+      'TODO: Aliqua adipisicing ex magna quis esse cupidatat veniam non ullamco aute nisi dolore. Sint non adipisicing officia eu adipisicing non deserunt in ex magna consectetur esse tempor.'
+    );
+
+
   });
 
   it('should type something into api request field and check that correct elements are returned', () => {
     page.navigateTo();
     page.enterAField('apiRequest', 'owner=Barry&contains=Lorem');
     page.selectEnterKey();
-    expect(page.getUniqueTodo('Labore reprehenderit Lorem adipisicing non. Sit incididunt commodo dolor do id.')).toEqual(
-      'TODO: Labore reprehenderit Lorem adipisicing non. Sit incididunt commodo dolor do id.'
+    expect(page.getUniqueTodo('Laborum pariatur in et ipsum occaecat qui occaecat enim ut adipisicing nisi cupidatat magna veniam. Amet ullamco veniam Lorem officia aute consectetur aliquip quis laborum fugiat velit incididunt.')).toEqual(
+      'DONE: Laborum pariatur in et ipsum occaecat qui occaecat enim ut adipisicing nisi cupidatat magna veniam. Amet ullamco veniam Lorem officia aute consectetur aliquip quis laborum fugiat velit incididunt.'
+    );
+
+    expect(page.getUniqueTodo('Veniam commodo exercitation consequat eu ut duis ex do. Sit fugiat cupidatat enim Lorem tempor minim sint laboris.')).toEqual(
+      'TODO: Veniam commodo exercitation consequat eu ut duis ex do. Sit fugiat cupidatat enim Lorem tempor minim sint laboris.'
     );
   });
 });
